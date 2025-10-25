@@ -9,6 +9,7 @@ public class PlayerInputControls : MonoBehaviour
 
     void Awake()
     {
+        animator = GetComponent<Animator>();
         rigidbody2D = GetComponent<Rigidbody2D>();
     }
 
@@ -19,6 +20,6 @@ public class PlayerInputControls : MonoBehaviour
         rigidbody2D.linearVelocity = moveSpeed * movedir;
 
         animator.SetFloat("InputX", movedir.x);
-        animator.SetFloat("InputY", movedir.x);
+        animator.SetFloat("InputY", movedir.y);
     }
 }
