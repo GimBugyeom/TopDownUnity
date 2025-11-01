@@ -1,4 +1,6 @@
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 public class PlayerInputControls : MonoBehaviour
@@ -9,8 +11,8 @@ public class PlayerInputControls : MonoBehaviour
 
     void Awake()
     {
-        animator = GetComponent<Animator>();
         rigidbody2D = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
     }
 
     public void OnMove(InputAction.CallbackContext context)
@@ -21,5 +23,14 @@ public class PlayerInputControls : MonoBehaviour
 
         animator.SetFloat("InputX", movedir.x);
         animator.SetFloat("InputY", movedir.y);
+    }
+
+    [SerializeField] UnityEvent triggered;
+    public void OnInteract(InputAction.CallbackContext context) 
+    {
+        if (context.started) 
+        {
+            triggered?.Invoke();
+        }
     }
 }
